@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import inflection from 'inflection';
 import TextField from 'material-ui/TextField';
 import * as ReactColor from 'react-color';
 
@@ -6,13 +7,15 @@ require('./ColorInput.css');
 
 class ColorInput extends Component {
   state = {
-    show: false,
-    color: this.props.input.value
+    show: false
   };
 
   handleOpen = () => this.setState({ show: true });
   handleClose = () => this.setState({ show: false });
-  handleChange = (color) => this.setState({ color: color.hex });
+  handleChange = ({ hex }) => {
+    this.props.input.onChange(hex);
+    this.forceUpdate();
+  };
 
   render() {
     const {
@@ -23,6 +26,7 @@ class ColorInput extends Component {
       elStyle,
       options,
       picker,
+      input,
     } = this.props;
 
     const Picker = ReactColor[`${picker}Picker`];
@@ -30,20 +34,23 @@ class ColorInput extends Component {
     return (
       <div>
         <TextField
-          value={this.state.color}
+          {...input}
           onFocus={this.handleOpen}
-          floatingLabelText={label || source}
+          floatingLabelText={ label || inflection.humanize(source) }
           errorText={touched && error}
           style={elStyle}
         />
         {
           this.state.show?
             <div className="ColorInput-popup">
-              <div className="ColorInput-cover" onClick={this.handleClose} />
+              <div
+                className="ColorInput-cover"
+                onClick={this.handleClose}
+              />
               <Picker
-                color={ this.state.color }
-                onChange={ this.handleChange }
                 {...options}
+                color={input.value}
+                onChange={this.handleChange}
               />
             </div>
             : null
@@ -58,6 +65,7 @@ ColorInput.propTypes = {
   label: PropTypes.string,
   options: PropTypes.object,
   source: PropTypes.string,
+  input: PropTypes.object,
   picker: (props, propName, componentName) =>
     !ReactColor[`${props[propName]}Picker`] &&
     new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`.`)

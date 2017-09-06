@@ -2,6 +2,8 @@
 
 A color picker for [admin-on-rest](https://github.com/marmelab/admin-on-rest) using [React Color](http://casesandberg.github.io/react-color/), a collection of color pickers.
 
+![color-input.gif](color-input.gif)
+
 ## Installation
 
 ```sh

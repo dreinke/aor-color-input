@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import inflection from 'inflection';
 import TextField from 'material-ui/TextField';
 import * as ReactColor from 'react-color';
 
 require('./ColorInput.css');
 
-class ColorInput extends Component {
+class ColorInput extends React.Component {
   state = {
     show: false
   };

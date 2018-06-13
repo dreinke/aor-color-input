@@ -52,6 +52,8 @@ You can customize the color picker using the `picker` attribute.
 - Swatches
 - Twitter
 
+## react-admin
+If you are looking for a react-admin(2.x) support, visit [react-admin-color-input](https://github.com/vascofg/react-admin-color-input).
 
 ## License
 

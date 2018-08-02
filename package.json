@@ -1,6 +1,6 @@
 {
   "name": "aor-color-input",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "<ColorInput> component for admin-on-rest",
   "main": "lib/index.js",
   "scripts": {

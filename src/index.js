@@ -22,8 +22,7 @@ class ColorInput extends React.Component {
     const {
       label,
       source,
-      touched,
-      error,
+      meta,
       elStyle,
       options,
       picker,
@@ -38,7 +37,7 @@ class ColorInput extends React.Component {
           {...input}
           onFocus={this.handleOpen}
           floatingLabelText={ label || inflection.humanize(source) }
-          errorText={touched && error}
+          errorText={meta.touched && meta.error}
           style={elStyle}
         />
         {
@@ -67,6 +66,10 @@ ColorInput.propTypes = {
   options: PropTypes.object,
   source: PropTypes.string,
   input: PropTypes.object,
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string,
+  }),
   picker: (props, propName, componentName) =>
     !ReactColor[`${props[propName]}Picker`] &&
     new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`.`)
